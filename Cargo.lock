@@ -305,7 +305,7 @@ checksum = "d71b6127be86fdcfddb610f7182ac57211d4b18a3e9c82eb2d17662f2227ad6a"
 [[package]]
 name = "cairo-air"
 version = "0.1.1"
-source = "git+https://github.com/Eikix/stwo-cairo?branch=feat%2Fno_std_hashmap#92197ef7b5bd8b1be1c01430c1b68a29d773b3cb"
+source = "git+https://github.com/Eikix/stwo-cairo?rev=7892e215cdef3618034a11ac9c3f69f6273c817e#7892e215cdef3618034a11ac9c3f69f6273c817e"
 dependencies = [
  "itertools 0.12.1",
  "num-traits",
@@ -353,35 +353,6 @@ dependencies = [
 [[package]]
 name = "cairo-vm"
 version = "2.0.1"
-source = "git+https://github.com/lambdaclass/cairo-vm?rev=9c44e1cef56c6ea557d6441e27ad3c756bbbe8a9#9c44e1cef56c6ea557d6441e27ad3c756bbbe8a9"
-dependencies = [
- "anyhow",
- "bincode",
- "bitvec",
- "generic-array",
- "hashbrown 0.15.3",
- "hex",
- "indoc",
- "keccak",
- "lazy_static",
- "nom",
- "num-bigint",
- "num-integer",
- "num-traits",
- "rand 0.8.5",
- "rust_decimal",
- "serde",
- "serde_json",
- "sha2",
- "sha3",
- "starknet-crypto 0.7.4",
- "starknet-types-core",
- "thiserror 2.0.12",
-]
-
-[[package]]
-name = "cairo-vm"
-version = "2.0.1"
 source = "git+https://github.com/lambdaclass/cairo-vm?rev=dc1c49bdc0d5ec69a36ac22559dde38c0b724991#dc1c49bdc0d5ec69a36ac22559dde38c0b724991"
 dependencies = [
  "anyhow",
@@ -413,7 +384,7 @@ name = "cairo-wasm-demo"
 version = "0.1.0"
 dependencies = [
  "cairo-air",
- "cairo-vm 2.0.1 (git+https://github.com/lambdaclass/cairo-vm?rev=dc1c49bdc0d5ec69a36ac22559dde38c0b724991)",
+ "cairo-vm",
  "console_error_panic_hook",
  "serde",
  "serde_json",
@@ -1548,12 +1519,12 @@ dependencies = [
 [[package]]
 name = "stwo-cairo-adapter"
 version = "0.1.0"
-source = "git+https://github.com/Eikix/stwo-cairo?branch=feat%2Fno_std_hashmap#92197ef7b5bd8b1be1c01430c1b68a29d773b3cb"
+source = "git+https://github.com/Eikix/stwo-cairo?rev=7892e215cdef3618034a11ac9c3f69f6273c817e#7892e215cdef3618034a11ac9c3f69f6273c817e"
 dependencies = [
  "bincode",
  "bytemuck",
  "cairo-lang-casm",
- "cairo-vm 2.0.1 (git+https://github.com/lambdaclass/cairo-vm?rev=9c44e1cef56c6ea557d6441e27ad3c756bbbe8a9)",
+ "cairo-vm",
  "dashmap",
  "itertools 0.12.1",
  "log",
@@ -1569,7 +1540,7 @@ dependencies = [
 [[package]]
 name = "stwo-cairo-common"
 version = "0.1.0"
-source = "git+https://github.com/Eikix/stwo-cairo?branch=feat%2Fno_std_hashmap#92197ef7b5bd8b1be1c01430c1b68a29d773b3cb"
+source = "git+https://github.com/Eikix/stwo-cairo?rev=7892e215cdef3618034a11ac9c3f69f6273c817e#7892e215cdef3618034a11ac9c3f69f6273c817e"
 dependencies = [
  "bytemuck",
  "itertools 0.12.1",
@@ -1585,7 +1556,7 @@ dependencies = [
 [[package]]
 name = "stwo-cairo-serialize"
 version = "0.1.0"
-source = "git+https://github.com/Eikix/stwo-cairo?branch=feat%2Fno_std_hashmap#92197ef7b5bd8b1be1c01430c1b68a29d773b3cb"
+source = "git+https://github.com/Eikix/stwo-cairo?rev=7892e215cdef3618034a11ac9c3f69f6273c817e#7892e215cdef3618034a11ac9c3f69f6273c817e"
 dependencies = [
  "starknet-ff",
  "stwo-cairo-serialize-derive",
@@ -1595,7 +1566,7 @@ dependencies = [
 [[package]]
 name = "stwo-cairo-serialize-derive"
 version = "0.1.0"
-source = "git+https://github.com/Eikix/stwo-cairo?branch=feat%2Fno_std_hashmap#92197ef7b5bd8b1be1c01430c1b68a29d773b3cb"
+source = "git+https://github.com/Eikix/stwo-cairo?rev=7892e215cdef3618034a11ac9c3f69f6273c817e#7892e215cdef3618034a11ac9c3f69f6273c817e"
 dependencies = [
  "quote",
  "syn 2.0.101",
@@ -1626,7 +1597,7 @@ dependencies = [
 [[package]]
 name = "stwo_cairo_prover"
 version = "0.1.0"
-source = "git+https://github.com/Eikix/stwo-cairo?branch=feat%2Fno_std_hashmap#92197ef7b5bd8b1be1c01430c1b68a29d773b3cb"
+source = "git+https://github.com/Eikix/stwo-cairo?rev=7892e215cdef3618034a11ac9c3f69f6273c817e#7892e215cdef3618034a11ac9c3f69f6273c817e"
 dependencies = [
  "cairo-air",
  "hex",

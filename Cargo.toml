@@ -24,9 +24,9 @@ opt-level = "s" # Optimize for size
 
 
 [patch.crates-io]
-stwo-cairo-adapter = { git = "https://github.com/Eikix/stwo-cairo", branch = "feat/no_std_hashmap" }
-stwo_cairo_prover = { git = "https://github.com/Eikix/stwo-cairo", branch = "feat/no_std_hashmap" }
-cairo-air = { git = "https://github.com/Eikix/stwo-cairo", branch = "feat/no_std_hashmap" }
+stwo-cairo-adapter = { git = "https://github.com/Eikix/stwo-cairo", rev = "7892e215cdef3618034a11ac9c3f69f6273c817e" }
+stwo_cairo_prover = { git = "https://github.com/Eikix/stwo-cairo", rev = "7892e215cdef3618034a11ac9c3f69f6273c817e" }
+cairo-air = { git = "https://github.com/Eikix/stwo-cairo", rev = "7892e215cdef3618034a11ac9c3f69f6273c817e" }
 
 [package.metadata.wasm-pack.profile.release]
 wasm-opt = false
