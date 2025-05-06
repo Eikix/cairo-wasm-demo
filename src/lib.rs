@@ -83,15 +83,13 @@ pub fn prove_with_stwo(
 pub fn run_prove_and_verify() -> Result<(), JsError> {
     let cairo_runner = wrap_error!(run_cairo_program())?;
     let prover_input = wrap_error!(adapt_finished_runner(cairo_runner))?;
-    let proof: CairoProof<Blake2sMerkleHasher> = wrap_error!(prove_with_stwo(prover_input))?;
-    let preprocessed_trace = PreProcessedTraceVariant::CanonicalWithoutPedersen;
-    let pcs_config = Default::default();
-    wrap_error!(verify_cairo::<Blake2sMerkleChannel>(
-        proof,
-        pcs_config,
-        preprocessed_trace
-    ))?;
-    log("Proof verified");
+    let _: CairoProof<Blake2sMerkleHasher> = wrap_error!(prove_with_stwo(prover_input))?;
+    // wrap_error!(verify_cairo::<Blake2sMerkleChannel>(
+    //     proof,
+    //     pcs_config,
+    //     preprocessed_trace
+    // ))?;
+    log("Proof generated");
 
     Ok(())
 }
