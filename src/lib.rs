@@ -5,12 +5,12 @@ use cairo_vm::{
     hint_processor::builtin_hint_processor::builtin_hint_processor_definition::BuiltinHintProcessor,
     types::layout_name::LayoutName,
     vm::errors::cairo_run_errors::CairoRunError,
-    vm::runners::cairo_runner::ProverInputInfo,
+    vm::runners::cairo_runner::CairoRunner,
 };
 use wasm_bindgen::prelude::*;
 
 use cairo_air::{verifier::verify_cairo, CairoProof, PreProcessedTraceVariant};
-use stwo_cairo_adapter::{adapter::prover_input_info_to_prover_input, ProverInput};
+use stwo_cairo_adapter::{adapter::adapt_finished_runner, ProverInput};
 use stwo_cairo_prover::{
     prover::prove_cairo,
     stwo_prover::core::vcs::blake2_merkle::{Blake2sMerkleChannel, Blake2sMerkleHasher},
@@ -35,7 +35,7 @@ macro_rules! wrap_error {
     };
 }
 
-pub fn run_cairo_program() -> Result<ProverInputInfo, CairoRunError> {
+pub fn run_cairo_program() -> Result<CairoRunner, CairoRunError> {
     const PROGRAM_JSON: &[u8] = include_bytes!("../cairo_programs/fibonacci.json");
 
     let mut hint_executor = BuiltinHintProcessor::new_empty();
@@ -53,8 +53,7 @@ pub fn run_cairo_program() -> Result<ProverInputInfo, CairoRunError> {
     };
 
     let runner = cairo_run(PROGRAM_JSON, &cairo_run_config, &mut hint_executor)?;
-    let prover_input_info = runner.get_prover_input_info()?;
-    Ok(prover_input_info)
+    Ok(runner)
 }
 
 /// Proves a given prover input with STWO
@@ -82,8 +81,8 @@ pub fn prove_with_stwo(
 ///   - `Err(JsError)`: If any step in the process failed
 #[wasm_bindgen(js_name = runProveAndVerify)]
 pub fn run_prove_and_verify() -> Result<(), JsError> {
-    let mut prover_input_info = wrap_error!(run_cairo_program())?;
-    let prover_input = wrap_error!(prover_input_info_to_prover_input(&mut prover_input_info))?;
+    let cairo_runner = wrap_error!(run_cairo_program())?;
+    let prover_input = wrap_error!(adapt_finished_runner(cairo_runner))?;
     let proof: CairoProof<Blake2sMerkleHasher> = wrap_error!(prove_with_stwo(prover_input))?;
     let preprocessed_trace = PreProcessedTraceVariant::CanonicalWithoutPedersen;
     let pcs_config = Default::default();
@@ -103,20 +102,20 @@ mod tests {
 
     #[test]
     fn test_run_cairo_program() {
-        run_cairo_program().unwrap();
+        let _ = run_cairo_program().unwrap();
     }
 
     #[test]
     fn test_prove_with_stwo() {
-        let mut prover_input_info = run_cairo_program().unwrap();
-        let prover_input = prover_input_info_to_prover_input(&mut prover_input_info).unwrap();
+        let cairo_runner = run_cairo_program().unwrap();
+        let prover_input = adapt_finished_runner(cairo_runner).unwrap();
         let _ = prove_with_stwo(prover_input).unwrap();
     }
 
     #[test]
     fn test_prove_verify() {
-        let mut prover_input_info = run_cairo_program().unwrap();
-        let prover_input = prover_input_info_to_prover_input(&mut prover_input_info).unwrap();
+        let cairo_runner = run_cairo_program().unwrap();
+        let prover_input = adapt_finished_runner(cairo_runner).unwrap();
         let proof = prove_with_stwo(prover_input).unwrap();
         let preprocessed_trace = PreProcessedTraceVariant::CanonicalWithoutPedersen;
         let pcs_config = Default::default();
