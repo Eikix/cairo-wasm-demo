@@ -7,8 +7,26 @@ edition = "2021"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-cairo-vm = { git = "https://github.com/lambdaclass/cairo-vm", default-features = false, features = "console_error_panic_hook" }
+cairo-vm = { git = "https://github.com/lambdaclass/cairo-vm", rev = "9c44e1cef56c6ea557d6441e27ad3c756bbbe8a9", features = [
+  "mod_builtin",
+], default-features = false }
 wasm-bindgen = "0.2"
+console_error_panic_hook = "0.1.2"
+stwo-cairo-adapter = { version = "*" }
+stwo_cairo_prover = "*"
+cairo-air = "*"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0", features = ["alloc"] }
+
 
 [profile.release]
 opt-level = "s" # Optimize for size
+
+
+[patch.crates-io]
+stwo-cairo-adapter = { git = "https://github.com/Eikix/stwo-cairo", branch = "feat/no_std_hashmap" }
+stwo_cairo_prover = { git = "https://github.com/Eikix/stwo-cairo", branch = "feat/no_std_hashmap" }
+cairo-air = { git = "https://github.com/Eikix/stwo-cairo", branch = "feat/no_std_hashmap" }
+
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = false
