@@ -7,7 +7,7 @@ edition = "2021"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-cairo-vm = { git = "https://github.com/lambdaclass/cairo-vm", rev = "9c44e1cef56c6ea557d6441e27ad3c756bbbe8a9", features = [
+cairo-vm = { git = "https://github.com/lambdaclass/cairo-vm", rev = "dc1c49bdc0d5ec69a36ac22559dde38c0b724991", features = [
   "mod_builtin",
 ], default-features = false }
 wasm-bindgen = "0.2"
