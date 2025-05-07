@@ -99,10 +99,14 @@ pub fn run_prove_and_verify() -> Result<(), JsError> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::string::String;
 
     #[test]
     fn test_run_cairo_program() {
-        let _ = run_cairo_program().unwrap();
+        let mut runner = run_cairo_program().unwrap();
+        let mut output = String::new();
+        runner.vm.write_output(&mut output).unwrap();
+        assert_eq!(output, "144\n");
     }
 
     #[test]
