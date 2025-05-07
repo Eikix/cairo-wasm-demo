@@ -9,11 +9,10 @@ use cairo_vm::{
 };
 use wasm_bindgen::prelude::*;
 
-use cairo_air::{verifier::verify_cairo, CairoProof, PreProcessedTraceVariant};
-use stwo_cairo_adapter::{adapter::adapt_finished_runner, ProverInput};
+use cairo_air::{verifier::verify_cairo, PreProcessedTraceVariant};
+use stwo_cairo_adapter::adapter::adapt_finished_runner;
 use stwo_cairo_prover::{
-    prover::prove_cairo,
-    stwo_prover::core::vcs::blake2_merkle::{Blake2sMerkleChannel, Blake2sMerkleHasher},
+    prover::prove_cairo, stwo_prover::core::vcs::blake2_merkle::Blake2sMerkleChannel,
 };
 
 #[wasm_bindgen]
@@ -56,23 +55,6 @@ pub fn run_cairo_program() -> Result<CairoRunner, CairoRunError> {
     Ok(runner)
 }
 
-/// Proves a given prover input with STWO
-///
-/// Doesn't support proving pedersen hashes, because for performance purposes we prove with the
-/// CanonicalWithoutPedersen variant preprocessed trace, which is faster to setup.
-///
-/// # Arguments
-///
-/// * `prover_input` - The prover input to prove
-pub fn prove_with_stwo(
-    prover_input: ProverInput,
-) -> Result<CairoProof<Blake2sMerkleHasher>, Box<dyn std::error::Error>> {
-    let pcs_config = Default::default();
-    let preprocessed_trace = PreProcessedTraceVariant::CanonicalWithoutPedersen;
-    let proof = prove_cairo::<Blake2sMerkleChannel>(prover_input, pcs_config, preprocessed_trace)?;
-    Ok(proof)
-}
-
 /// Executes a Cairo program, generates a proof, and verifies the proof
 /// All in one step, exposed to JavaScript
 ///
@@ -83,9 +65,13 @@ pub fn prove_with_stwo(
 pub fn run_prove_and_verify() -> Result<(), JsError> {
     let cairo_runner = wrap_error!(run_cairo_program())?;
     let prover_input = wrap_error!(adapt_finished_runner(cairo_runner))?;
-    let proof: CairoProof<Blake2sMerkleHasher> = wrap_error!(prove_with_stwo(prover_input))?;
     let pcs_config = Default::default();
     let preprocessed_trace = PreProcessedTraceVariant::CanonicalWithoutPedersen;
+    let proof = wrap_error!(prove_cairo::<Blake2sMerkleChannel>(
+        prover_input,
+        pcs_config,
+        preprocessed_trace
+    ))?;
     wrap_error!(verify_cairo::<Blake2sMerkleChannel>(
         proof,
         pcs_config,
@@ -113,9 +99,11 @@ mod tests {
     fn test_prove_verify() {
         let cairo_runner = run_cairo_program().unwrap();
         let prover_input = adapt_finished_runner(cairo_runner).unwrap();
-        let proof = prove_with_stwo(prover_input).unwrap();
         let preprocessed_trace = PreProcessedTraceVariant::CanonicalWithoutPedersen;
         let pcs_config = Default::default();
+        let proof =
+            prove_cairo::<Blake2sMerkleChannel>(prover_input, pcs_config, preprocessed_trace)
+                .unwrap();
         let _ =
             verify_cairo::<Blake2sMerkleChannel>(proof, pcs_config, preprocessed_trace).unwrap();
     }
