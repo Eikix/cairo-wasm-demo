@@ -4,7 +4,10 @@
         "output",
         "pedersen",
         "range_check",
+        "ecdsa",
         "bitwise",
+        "ec_op",
+        "keccak",
         "poseidon",
         "range_check96",
         "add_mod",
@@ -13,7 +16,7 @@
     "compiler_version": "0.13.3",
     "data": [
         "0x40780017fff7fff",
-        "0x8",
+        "0xb",
         "0x1104800180018000",
         "0x4",
         "0x10780017fff7fff",
@@ -27,10 +30,13 @@
         "0x480680017fff8000",
         "0xb",
         "0x1104800180018000",
-        "0xd",
-        "0x400280007ff67fff",
-        "0x482680017ff68000",
+        "0x10",
+        "0x400280007ff37fff",
+        "0x482680017ff38000",
         "0x1",
+        "0x480a7ff47fff8000",
+        "0x480a7ff57fff8000",
+        "0x480a7ff67fff8000",
         "0x480a7ff77fff8000",
         "0x480a7ff87fff8000",
         "0x480a7ff97fff8000",
@@ -60,8 +66,16 @@
             "destination": "starkware.cairo.common.cairo_builtins.BitwiseBuiltin",
             "type": "alias"
         },
+        "__main__.EcOpBuiltin": {
+            "destination": "starkware.cairo.common.cairo_builtins.EcOpBuiltin",
+            "type": "alias"
+        },
         "__main__.HashBuiltin": {
             "destination": "starkware.cairo.common.cairo_builtins.HashBuiltin",
+            "type": "alias"
+        },
+        "__main__.KeccakBuiltin": {
+            "destination": "starkware.cairo.common.cairo_builtins.KeccakBuiltin",
             "type": "alias"
         },
         "__main__.ModBuiltin": {
@@ -86,7 +100,7 @@
         },
         "__main__.fib": {
             "decorators": [],
-            "pc": 27,
+            "pc": 30,
             "type": "function"
         },
         "__main__.fib.Args": {
@@ -131,7 +145,7 @@
                         "group": 4,
                         "offset": 0
                     },
-                    "pc": 27,
+                    "pc": 30,
                     "value": "[cast(fp + (-5), felt*)]"
                 }
             ],
@@ -146,14 +160,14 @@
                         "group": 4,
                         "offset": 0
                     },
-                    "pc": 27,
+                    "pc": 30,
                     "value": "[cast(fp + (-4), felt*)]"
                 }
             ],
             "type": "reference"
         },
         "__main__.fib.fib_body": {
-            "pc": 32,
+            "pc": 35,
             "type": "label"
         },
         "__main__.fib.n": {
@@ -165,7 +179,7 @@
                         "group": 4,
                         "offset": 0
                     },
-                    "pc": 27,
+                    "pc": 30,
                     "value": "[cast(fp + (-3), felt*)]"
                 }
             ],
@@ -180,7 +194,7 @@
                         "group": 4,
                         "offset": 1
                     },
-                    "pc": 30,
+                    "pc": 33,
                     "value": "[cast(ap + (-1), felt*)]"
                 }
             ],
@@ -195,7 +209,7 @@
                         "group": 4,
                         "offset": 1
                     },
-                    "pc": 33,
+                    "pc": 36,
                     "value": "[cast(ap + (-1), felt*)]"
                 }
             ],
@@ -217,15 +231,27 @@
             "members": {
                 "add_mod_ptr": {
                     "cairo_type": "starkware.cairo.common.cairo_builtins.ModBuiltin*",
-                    "offset": 6
+                    "offset": 9
                 },
                 "bitwise_ptr": {
                     "cairo_type": "starkware.cairo.common.cairo_builtins.BitwiseBuiltin*",
+                    "offset": 4
+                },
+                "ec_op_ptr": {
+                    "cairo_type": "starkware.cairo.common.cairo_builtins.EcOpBuiltin*",
+                    "offset": 5
+                },
+                "ecdsa_ptr": {
+                    "cairo_type": "starkware.cairo.common.cairo_builtins.SignatureBuiltin*",
                     "offset": 3
+                },
+                "keccak_ptr": {
+                    "cairo_type": "starkware.cairo.common.cairo_builtins.KeccakBuiltin*",
+                    "offset": 6
                 },
                 "mul_mod_ptr": {
                     "cairo_type": "starkware.cairo.common.cairo_builtins.ModBuiltin*",
-                    "offset": 7
+                    "offset": 10
                 },
                 "output_ptr": {
                     "cairo_type": "felt*",
@@ -237,18 +263,18 @@
                 },
                 "poseidon_ptr": {
                     "cairo_type": "starkware.cairo.common.cairo_builtins.PoseidonBuiltin*",
-                    "offset": 4
+                    "offset": 7
                 },
                 "range_check96_ptr": {
                     "cairo_type": "felt*",
-                    "offset": 5
+                    "offset": 8
                 },
                 "range_check_ptr": {
                     "cairo_type": "felt",
                     "offset": 2
                 }
             },
-            "size": 8,
+            "size": 11,
             "type": "struct"
         },
         "__main__.main.Return": {
@@ -314,7 +340,52 @@
                         "offset": 0
                     },
                     "pc": 6,
-                    "value": "[cast(fp + (-7), starkware.cairo.common.cairo_builtins.BitwiseBuiltin**)]"
+                    "value": "[cast(fp + (-9), starkware.cairo.common.cairo_builtins.BitwiseBuiltin**)]"
+                }
+            ],
+            "type": "reference"
+        },
+        "__main__.main.ec_op_ptr": {
+            "cairo_type": "starkware.cairo.common.cairo_builtins.EcOpBuiltin*",
+            "full_name": "__main__.main.ec_op_ptr",
+            "references": [
+                {
+                    "ap_tracking_data": {
+                        "group": 2,
+                        "offset": 0
+                    },
+                    "pc": 6,
+                    "value": "[cast(fp + (-8), starkware.cairo.common.cairo_builtins.EcOpBuiltin**)]"
+                }
+            ],
+            "type": "reference"
+        },
+        "__main__.main.ecdsa_ptr": {
+            "cairo_type": "starkware.cairo.common.cairo_builtins.SignatureBuiltin*",
+            "full_name": "__main__.main.ecdsa_ptr",
+            "references": [
+                {
+                    "ap_tracking_data": {
+                        "group": 2,
+                        "offset": 0
+                    },
+                    "pc": 6,
+                    "value": "[cast(fp + (-10), starkware.cairo.common.cairo_builtins.SignatureBuiltin**)]"
+                }
+            ],
+            "type": "reference"
+        },
+        "__main__.main.keccak_ptr": {
+            "cairo_type": "starkware.cairo.common.cairo_builtins.KeccakBuiltin*",
+            "full_name": "__main__.main.keccak_ptr",
+            "references": [
+                {
+                    "ap_tracking_data": {
+                        "group": 2,
+                        "offset": 0
+                    },
+                    "pc": 6,
+                    "value": "[cast(fp + (-7), starkware.cairo.common.cairo_builtins.KeccakBuiltin**)]"
                 }
             ],
             "type": "reference"
@@ -359,7 +430,7 @@
                         "offset": 0
                     },
                     "pc": 6,
-                    "value": "[cast(fp + (-10), felt**)]"
+                    "value": "[cast(fp + (-13), felt**)]"
                 },
                 {
                     "ap_tracking_data": {
@@ -367,7 +438,7 @@
                         "offset": 0
                     },
                     "pc": 17,
-                    "value": "cast([fp + (-10)] + 1, felt*)"
+                    "value": "cast([fp + (-13)] + 1, felt*)"
                 }
             ],
             "type": "reference"
@@ -382,7 +453,7 @@
                         "offset": 0
                     },
                     "pc": 6,
-                    "value": "[cast(fp + (-9), starkware.cairo.common.cairo_builtins.HashBuiltin**)]"
+                    "value": "[cast(fp + (-12), starkware.cairo.common.cairo_builtins.HashBuiltin**)]"
                 }
             ],
             "type": "reference"
@@ -427,7 +498,7 @@
                         "offset": 0
                     },
                     "pc": 6,
-                    "value": "[cast(fp + (-8), felt*)]"
+                    "value": "[cast(fp + (-11), felt*)]"
                 }
             ],
             "type": "reference"
@@ -703,7 +774,7 @@
                     "offset": 0
                 },
                 "pc": 6,
-                "value": "[cast(fp + (-10), felt**)]"
+                "value": "[cast(fp + (-13), felt**)]"
             },
             {
                 "ap_tracking_data": {
@@ -711,7 +782,7 @@
                     "offset": 0
                 },
                 "pc": 6,
-                "value": "[cast(fp + (-9), starkware.cairo.common.cairo_builtins.HashBuiltin**)]"
+                "value": "[cast(fp + (-12), starkware.cairo.common.cairo_builtins.HashBuiltin**)]"
             },
             {
                 "ap_tracking_data": {
@@ -719,7 +790,7 @@
                     "offset": 0
                 },
                 "pc": 6,
-                "value": "[cast(fp + (-8), felt*)]"
+                "value": "[cast(fp + (-11), felt*)]"
             },
             {
                 "ap_tracking_data": {
@@ -727,7 +798,31 @@
                     "offset": 0
                 },
                 "pc": 6,
-                "value": "[cast(fp + (-7), starkware.cairo.common.cairo_builtins.BitwiseBuiltin**)]"
+                "value": "[cast(fp + (-10), starkware.cairo.common.cairo_builtins.SignatureBuiltin**)]"
+            },
+            {
+                "ap_tracking_data": {
+                    "group": 2,
+                    "offset": 0
+                },
+                "pc": 6,
+                "value": "[cast(fp + (-9), starkware.cairo.common.cairo_builtins.BitwiseBuiltin**)]"
+            },
+            {
+                "ap_tracking_data": {
+                    "group": 2,
+                    "offset": 0
+                },
+                "pc": 6,
+                "value": "[cast(fp + (-8), starkware.cairo.common.cairo_builtins.EcOpBuiltin**)]"
+            },
+            {
+                "ap_tracking_data": {
+                    "group": 2,
+                    "offset": 0
+                },
+                "pc": 6,
+                "value": "[cast(fp + (-7), starkware.cairo.common.cairo_builtins.KeccakBuiltin**)]"
             },
             {
                 "ap_tracking_data": {
@@ -799,14 +894,14 @@
                     "offset": 0
                 },
                 "pc": 17,
-                "value": "cast([fp + (-10)] + 1, felt*)"
+                "value": "cast([fp + (-13)] + 1, felt*)"
             },
             {
                 "ap_tracking_data": {
                     "group": 4,
                     "offset": 0
                 },
-                "pc": 27,
+                "pc": 30,
                 "value": "[cast(fp + (-5), felt*)]"
             },
             {
@@ -814,7 +909,7 @@
                     "group": 4,
                     "offset": 0
                 },
-                "pc": 27,
+                "pc": 30,
                 "value": "[cast(fp + (-4), felt*)]"
             },
             {
@@ -822,7 +917,7 @@
                     "group": 4,
                     "offset": 0
                 },
-                "pc": 27,
+                "pc": 30,
                 "value": "[cast(fp + (-3), felt*)]"
             },
             {
@@ -830,7 +925,7 @@
                     "group": 4,
                     "offset": 1
                 },
-                "pc": 30,
+                "pc": 33,
                 "value": "[cast(ap + (-1), felt*)]"
             },
             {
@@ -838,7 +933,7 @@
                     "group": 4,
                     "offset": 1
                 },
-                "pc": 33,
+                "pc": 36,
                 "value": "[cast(ap + (-1), felt*)]"
             }
         ]
