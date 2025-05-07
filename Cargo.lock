@@ -305,7 +305,7 @@ checksum = "d71b6127be86fdcfddb610f7182ac57211d4b18a3e9c82eb2d17662f2227ad6a"
 [[package]]
 name = "cairo-air"
 version = "0.1.1"
-source = "git+https://github.com/Eikix/stwo-cairo?rev=26f6c77#26f6c771a2095490a645d6462924a5c5f9545954"
+source = "git+https://github.com/Eikix/stwo-cairo?branch=feat%2Fno_std_hashmap#26f6c771a2095490a645d6462924a5c5f9545954"
 dependencies = [
  "itertools 0.12.1",
  "num-traits",
@@ -1518,7 +1518,7 @@ dependencies = [
 [[package]]
 name = "stwo-cairo-adapter"
 version = "0.1.0"
-source = "git+https://github.com/Eikix/stwo-cairo?rev=26f6c77#26f6c771a2095490a645d6462924a5c5f9545954"
+source = "git+https://github.com/Eikix/stwo-cairo?branch=feat%2Fno_std_hashmap#26f6c771a2095490a645d6462924a5c5f9545954"
 dependencies = [
  "bincode",
  "bytemuck",
@@ -1539,7 +1539,7 @@ dependencies = [
 [[package]]
 name = "stwo-cairo-common"
 version = "0.1.0"
-source = "git+https://github.com/Eikix/stwo-cairo?rev=26f6c77#26f6c771a2095490a645d6462924a5c5f9545954"
+source = "git+https://github.com/Eikix/stwo-cairo?branch=feat%2Fno_std_hashmap#26f6c771a2095490a645d6462924a5c5f9545954"
 dependencies = [
  "bytemuck",
  "itertools 0.12.1",
@@ -1555,7 +1555,7 @@ dependencies = [
 [[package]]
 name = "stwo-cairo-serialize"
 version = "0.1.0"
-source = "git+https://github.com/Eikix/stwo-cairo?rev=26f6c77#26f6c771a2095490a645d6462924a5c5f9545954"
+source = "git+https://github.com/Eikix/stwo-cairo?branch=feat%2Fno_std_hashmap#26f6c771a2095490a645d6462924a5c5f9545954"
 dependencies = [
  "starknet-ff",
  "stwo-cairo-serialize-derive",
@@ -1565,7 +1565,7 @@ dependencies = [
 [[package]]
 name = "stwo-cairo-serialize-derive"
 version = "0.1.0"
-source = "git+https://github.com/Eikix/stwo-cairo?rev=26f6c77#26f6c771a2095490a645d6462924a5c5f9545954"
+source = "git+https://github.com/Eikix/stwo-cairo?branch=feat%2Fno_std_hashmap#26f6c771a2095490a645d6462924a5c5f9545954"
 dependencies = [
  "quote",
  "syn 2.0.101",
@@ -1596,7 +1596,7 @@ dependencies = [
 [[package]]
 name = "stwo_cairo_prover"
 version = "0.1.0"
-source = "git+https://github.com/Eikix/stwo-cairo?rev=26f6c77#26f6c771a2095490a645d6462924a5c5f9545954"
+source = "git+https://github.com/Eikix/stwo-cairo?branch=feat%2Fno_std_hashmap#26f6c771a2095490a645d6462924a5c5f9545954"
 dependencies = [
  "cairo-air",
  "hex",
