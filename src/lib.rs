@@ -10,7 +10,7 @@ use cairo_vm::{
 use wasm_bindgen::prelude::*;
 
 use cairo_air::{verifier::verify_cairo, CairoProof, PreProcessedTraceVariant};
-use stwo_cairo_adapter::{plain::adapt_finished_runner, ProverInput};
+use stwo_cairo_adapter::{adapter::adapt_finished_runner, ProverInput};
 use stwo_cairo_prover::{
     prover::prove_cairo,
     stwo_prover::core::vcs::blake2_merkle::{Blake2sMerkleChannel, Blake2sMerkleHasher},
@@ -47,9 +47,9 @@ pub fn run_cairo_program() -> Result<CairoRunner, CairoRunError> {
         layout: LayoutName::all_cairo_stwo,
         proof_mode: true,
         secure_run: Some(true),
-        allow_missing_builtins: Some(true),
         disable_trace_padding: true,
-        ..Default::default()
+        allow_missing_builtins: Default::default(),
+        dynamic_layout_params: Default::default(),
     };
 
     let runner = cairo_run(PROGRAM_JSON, &cairo_run_config, &mut hint_executor)?;
