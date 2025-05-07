@@ -44,10 +44,10 @@ pub fn run_cairo_program() -> Result<CairoRunner, CairoRunError> {
         entrypoint: "main",
         trace_enabled: true,
         relocate_mem: true,
-        layout: LayoutName::all_cairo,
+        layout: LayoutName::all_cairo_stwo,
         proof_mode: true,
         secure_run: Some(true),
-        allow_missing_builtins: Some(false),
+        allow_missing_builtins: Some(true),
         disable_trace_padding: true,
         ..Default::default()
     };
