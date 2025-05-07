@@ -18,7 +18,32 @@ async function initializeWasmInWorker() {
   initializationPromise = (async () => {
     try {
       console.log("Worker: Attempting to initialize WASM module...");
-      await init("/cairo_wasm_demo_bg.wasm");
+
+      // Allocate 8GB of memory (128,000 pages * 64KB)
+      const memory = new WebAssembly.Memory({
+        initial: 65536, // 8GB
+        maximum: 65536, // Optional: cap at 8GB
+      });
+
+      // Import object for WASM module
+      const importObject = {
+        env: {
+          memory,
+          // Custom log function to handle string pointers (if needed by wasm-bindgen)
+          log: (msgPtr: number, len: number) => {
+            const memoryBuffer = new Uint8Array(memory.buffer);
+            const msg = new TextDecoder().decode(memoryBuffer.subarray(msgPtr, msgPtr + len));
+            console.log("WASM Log:", msg);
+          },
+        },
+      };
+
+      // Initialize WASM module with custom memory
+      await init("/cairo_wasm_demo_bg.wasm", { importObject });
+
+      // Log allocated memory size
+      console.log("Worker: Allocated memory size:", memory.buffer.byteLength, "bytes");
+
       wasmInitialized = true;
       isInitializing = false;
       console.log("Worker: WASM module initialized successfully.");
@@ -61,7 +86,7 @@ self.onmessage = async (event: MessageEvent) => {
 
     console.log("Worker: WASM initialized, proceeding to run Cairo program.");
     try {
-      runProveAndVerify();
+      await runProveAndVerify();
       self.postMessage({ type: "CAIRO_RESULT", payload: "Proof verified" });
     } catch (err) {
       console.error("Worker: Cairo program error:", err);

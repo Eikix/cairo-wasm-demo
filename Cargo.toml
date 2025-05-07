@@ -20,8 +20,8 @@ serde_json = { version = "1.0", features = ["alloc"] }
 
 
 [profile.release]
-opt-level = "s" # Optimize for size
-
+opt-level = "s" # Size optimization
+lto = true      # Link-time optimization for smaller binary
 
 [patch.crates-io]
 stwo-cairo-adapter = { git = "https://github.com/Eikix/stwo-cairo", branch = "feat/no_std_hashmap" }
@@ -29,4 +29,8 @@ stwo_cairo_prover = { git = "https://github.com/Eikix/stwo-cairo", branch = "fea
 cairo-air = { git = "https://github.com/Eikix/stwo-cairo", branch = "feat/no_std_hashmap" }
 
 [package.metadata.wasm-pack.profile.release]
-wasm-opt = false
+wasm-opt = [
+  "-O3",
+  "--enable-reference-types",
+  "--enable-bigint",
+] # Optimize and enable bigint

@@ -9,6 +9,7 @@ export default defineConfig({
       'Cross-Origin-Opener-Policy': 'same-origin',
       'Cross-Origin-Embedder-Policy': 'require-corp',
     },
+    allowedHosts: ['.ngrok-free.app'],
   },
   worker: {
     // Ensures workers can also use ES modules and bundle correctly.
